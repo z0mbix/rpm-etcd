@@ -3,21 +3,16 @@ rpm-etcd
 
 An RPM spec file to build and install etcd.
 
-To Install:
-You will need go from http://repo.milford.io.
+**Requirements:**
 
-`sudo yum -y install rpmdevtools go && rpmdev-setuptree`
+This requires the **rpmdevtools** package
 
-`wget https://raw.github.com/nmilford/rpm-etcd/master/etcd.spec -O ~/rpmbuild/SPECS/etcd.spec`
+**Create the RPM:**
 
-`wget https://github.com/coreos/etcd/releases/download/v0.3.0/etcd-v0.3.0-linux-amd64.tar.gz -O ~/rpmbuild/SOURCES/etcd-v0.3.0-linux-amd64.tar.gz`
+Check the release version you want to package from the etcd github release page: [https://github.com/coreos/etcd/releases](https://github.com/coreos/etcd/releases)
 
-`wget https://raw.github.com/nmilford/rpm-etcd/master/etcd.initd -O ~/rpmbuild/SOURCES/etcd.initd`
+Then run the build script to download and create the RPM:
 
-`wget https://raw.github.com/nmilford/rpm-etcd/master/etcd.sysconfig -O ~/rpmbuild/SOURCES/etcd.sysconfig`
+    $ export ETCD_VERSION=0.4.6 ETCD_RELEASE=1 ./build-rpm.sh
 
-`wget https://raw.github.com/nmilford/rpm-etcd/master/etcd.nofiles.conf -O ~/rpmbuild/SOURCES/etcd.nofiles.conf`
-
-`wget https://raw.github.com/nmilford/rpm-etcd/master/etcd.logrotate -O ~/rpmbuild/SOURCES/etcd.logrotate`
-
-`rpmbuild -bb ~/rpmbuild/SPECS/etcd.spec`
+This should create **~/rpmbuild/RPMS/x86_64/etcd-0.4.6-1.x86_64.rpm**

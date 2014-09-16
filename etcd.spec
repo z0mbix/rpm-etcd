@@ -28,10 +28,12 @@
 %define etcd_user  %{name}
 %define etcd_group %{name}
 %define etcd_data  %{_localstatedir}/lib/%{name}
+%define etcd_version %(echo $ETCD_VERSION)
+%define etcd_release %(echo $ETCD_RELEASE)
 
 Name:      etcd
-Version:   0.3.0
-Release:   1
+Version:   %{etcd_version}
+Release:   %{etcd_release}
 Summary:   A highly-available key value store for shared configuration and service discovery.
 License:   Apache 2.0
 URL:       https://github.com/coreos/etcd
@@ -47,7 +49,6 @@ Requires(pre): shadow-utils
 Requires(post): /sbin/chkconfig
 Requires(preun): /sbin/chkconfig, /sbin/service
 Requires(postun): /sbin/service
-BuildRequires: golang >= 1.1
 Requires:      golang >= 1.1
 
 %description
@@ -122,6 +123,7 @@ fi
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 
 %changelog
+* Tue Sep 16 2014 David Wooldridge <zombie@zombix.org> 0.4.6
 * Mon Feb 10 2014 Nathan Milford <nathan@milford.io> 0.3.0
 * Sat Dec 28 2013 Nathan Milford <nathan@milford.io> 0.2.0
 * Thu Dec 05 2013 Nathan Milford <nathan@milford.io> 0.2.0-rc1

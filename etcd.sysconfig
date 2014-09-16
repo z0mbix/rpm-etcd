@@ -13,10 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Will be used to populate IP address values below.  Setting some items to
-# '0.0.0.0' is not compatable with the discovery API.
-_MY_IPADDR=$(/sbin/ifconfig | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | sort | awk '{print $1}')
-
 # Daemon User
 ETCD_USER="etcd"
 
@@ -38,7 +34,7 @@ ETCD_DISCOVERY_TOKEN=""
 ETCD_NODE_NAME=$(hostname -s)
 
 # Hostname and port for the etcd server to work on.
-ETCD_LISTEN="$_MY_IPADDR:4001"
+ETCD_LISTEN="0.0.0.0:4001"
 
 # Directory to store log and snapshot.
 ETCD_DATA_DIR="/var/lib/etcd/"
@@ -54,7 +50,7 @@ ETCD_LOGGING=""
 ETCD_MAXSIZE=9
 
 # Max size of result buffer.
-ETCD_MAXRESULT=1024 
+ETCD_MAXRESULT=1024
 
 # Number of retries to attempt while joining a cluster
 ETCD_RETRIES=3
@@ -71,7 +67,7 @@ ETCD_KEY=""
 ETCD_SNAPSHOT=""
 
 # Hostname and port for the RAFT server to work on.
-RAFT_LISTEN="$_MY_IPADDR:7001"
+RAFT_LISTEN="0.0.0.0:7001"
 
 # Set security settings for the RAFT server.
 #  Leave blank if you do not plan to use this feature, otherwise add appropriate
@@ -120,5 +116,5 @@ fi
 # Add support for:
 #  -peers-file
 #  -config
-#  -cors 
+#  -cors
 #  -cpuprofile
